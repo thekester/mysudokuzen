@@ -1,0 +1,79 @@
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity">
+
+    <!-- Switch pour activer/désactiver les sons -->
+    <TextView
+        android:id="@+id/soundTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enable Sounds"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp" />
+
+    <Switch
+        android:id="@+id/soundSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/soundTextView"
+        app:layout_constraintLeft_toRightOf="@id/soundTextView"
+        android:layout_marginStart="16dp"/>
+
+    <!-- RadioGroup pour choisir le niveau de difficulté -->
+    <TextView
+        android:id="@+id/difficultyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Difficulty"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/soundTextView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp" />
+
+    <RadioGroup
+        android:id="@+id/difficultyRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/difficultyTextView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="16dp">
+
+        <RadioButton
+            android:id="@+id/easyRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Easy" />
+
+        <RadioButton
+            android:id="@+id/mediumRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium" />
+
+        <RadioButton
+            android:id="@+id/hardRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hard" />
+    </RadioGroup>
+
+    <!-- Back Button -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/difficultyRadioGroup"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+        
+</androidx.constraintlayout.widget.ConstraintLayout>
