@@ -1,10 +1,9 @@
 package com.example.sudokuzen
 
-import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.RadioGroup
+import android.content.SharedPreferences
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
