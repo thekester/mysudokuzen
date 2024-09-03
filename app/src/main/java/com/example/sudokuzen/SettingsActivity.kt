@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.RadioGroup
 import android.content.SharedPreferences
-import android.widget.Switch
+import androidx.appcompat.widget.SwitchCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 
 class SettingsActivity : AppCompatActivity() {
 
-    private lateinit var soundSwitch: Switch
+    private lateinit var soundSwitch: SwitchCompat
     private lateinit var difficultyRadioGroup: RadioGroup
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var backButton: Button
