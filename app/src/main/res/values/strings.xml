@@ -8,6 +8,10 @@
     <string name="previous">Previous</string>
     <string name="high_scores">High Scores</string>
 
+    <string name="game_screen_title">Game Screen</string>
+    <string name="sudoku_not_loaded_error">Error: Sudoku not loaded</string>
+    <string name="back_button_text">Back</string>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
