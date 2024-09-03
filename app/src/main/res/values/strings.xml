@@ -12,6 +12,12 @@
     <string name="sudoku_not_loaded_error">Error: Sudoku not loaded</string>
     <string name="back_button_text">Back</string>
 
+    <string name="enable_sounds">Enable Sounds</string>
+    <string name="select_difficulty">Select Difficulty</string>
+    <string name="difficulty_easy">Easy</string>
+    <string name="difficulty_medium">Medium</string>
+    <string name="difficulty_hard">Hard</string>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
