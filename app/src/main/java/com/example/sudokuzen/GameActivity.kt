@@ -1,6 +1,7 @@
 package com.example.sudokuzen
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.GridView
@@ -10,7 +11,6 @@ import androidx.preference.PreferenceManager
 import com.google.gson.Gson
 import java.io.InputStreamReader
 import android.widget.ArrayAdapter
-
 
 class GameActivity : AppCompatActivity() {
 
@@ -28,23 +28,28 @@ class GameActivity : AppCompatActivity() {
             finish() // Close the current activity and return to the previous one
         }
 
-        // Récupérer la difficulté sélectionnée depuis SharedPreferences
+        // Retrieve the difficulty selected from SharedPreferences
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val difficulty = sharedPreferences.getString("difficulty", "Medium") ?: "Medium"
 
         try {
-            // Charger le fichier JSON approprié en fonction de la difficulté
+            // Load the appropriate JSON file depending on the difficulty
             val sudoku = loadSudokuFromAssets(difficulty)
 
+            // Log the loaded Sudoku to check if it's properly loaded
+            Log.d("GameActivity", "Loaded Sudoku: ${sudoku.sudokus}")
+
             if (sudoku.sudokus.isNotEmpty()) {
-                // Afficher la première grille du Sudoku (vous pouvez en choisir une autre ou aléatoirement)
+                // Display the first Sudoku grid (you can choose another or randomly)
                 displaySudoku(gridView, sudoku.sudokus[0].grid)
-                errorTextView.visibility = View.GONE // Masquer le message d'erreur
+                errorTextView.visibility = View.GONE // Hide error message
             } else {
                 showError("Error: No Sudoku grids available", errorTextView, gridView)
             }
         } catch (e: Exception) {
-            // Afficher un message d'erreur si le chargement échoue
+            // Log the exception if loading fails
+            Log.e("GameActivity", "Error loading Sudoku", e)
+            // Display an error message if loading fails
             showError("Error: Failed to load Sudoku", errorTextView, gridView)
         }
     }
@@ -63,15 +68,19 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun displaySudoku(gridView: GridView, grid: List<List<Int>>) {
-        // Convertir la grille en une liste à plat (1D) pour l'adapter à l'ArrayAdapter
+        // Convert the grid into a flat list (1D) to adapt it to the ArrayAdapter
         val flatGrid = grid.flatten().map { if (it == 0) "" else it.toString() }
 
-        // Créer un ArrayAdapter pour lier les données à la GridView
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, flatGrid)
+        // Log the grid content to check if the flatGrid contains values
+        Log.d("GameActivity", "Sudoku Grid: $flatGrid")
+
+        // Use a custom layout for each cell
+        val adapter = ArrayAdapter(this, R.layout.sudoku_cell, flatGrid)
         gridView.adapter = adapter
     }
 
     private fun showError(message: String, errorTextView: TextView, gridView: GridView) {
+        Log.d("GameActivity", "Error: $message")
         errorTextView.text = message
         errorTextView.visibility = View.VISIBLE
         gridView.visibility = View.GONE

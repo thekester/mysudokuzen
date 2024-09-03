@@ -19,23 +19,23 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        // Initialiser les composants de l'UI
+        // Initialise the UI components
         soundSwitch = findViewById(R.id.soundSwitch)
         difficultyRadioGroup = findViewById(R.id.difficultyRadioGroup)
         backButton = findViewById(R.id.backButton)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
-        // Charger les paramètres sauvegardés
+        // Load saved settings
         loadPreferences()
 
-        // Listener pour le Switch des sons
+        // Listener for the Sound Switch
         soundSwitch.setOnCheckedChangeListener { _, isChecked ->
             val editor = sharedPreferences.edit()
             editor.putBoolean("sound_enabled", isChecked)
             editor.apply()
         }
 
-        // Listener pour les boutons radio de difficulté
+        // Listener for difficulty radio buttons
         difficultyRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             val editor = sharedPreferences.edit()
             when (checkedId) {
@@ -46,13 +46,13 @@ class SettingsActivity : AppCompatActivity() {
             editor.apply()
         }
 
-        // Listener pour le bouton retour
+        // Listener for the back button
         backButton.setOnClickListener {
             finish() // Close the current activity and return to the previous one
         }
     }
 
-    // Fonction pour charger les préférences utilisateur
+    // Function for loading user preferences
     private fun loadPreferences() {
         val soundEnabled = sharedPreferences.getBoolean("sound_enabled", true)
         soundSwitch.isChecked = soundEnabled

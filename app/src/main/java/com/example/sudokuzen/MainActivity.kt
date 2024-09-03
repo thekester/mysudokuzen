@@ -11,27 +11,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Bouton pour commencer un nouveau jeu
+        // Button to begin a new game
         val startButton = findViewById<Button>(R.id.startButton)
         startButton.setOnClickListener {
-            // Naviguer vers l'activité du jeu
+            // Go to the game activity
             val intent = Intent(this, GameActivity::class.java)
             startActivity(intent)
         }
 
-        // Bouton pour voir les scores
+        // Button to view scores
         val scoresButton = findViewById<Button>(R.id.scoresButton)
         scoresButton.setOnClickListener {
-            // Naviguer vers l'activité des scores
+            // Navigate to the scores activity
             val intent = Intent(this, ScoresActivity::class.java)
             startActivity(intent)
         }
 
-        // Bouton pour accéder aux paramètres
+        // Button to access settings
         val settingsButton = findViewById<Button>(R.id.settingsButton)
         settingsButton.setOnClickListener {
-            // Naviguer vers l'activité des paramètres
+            // Navigate to the settings activity
             val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Button to test new sudoku game
+        val testButton = findViewById<Button>(R.id.testButton)
+        testButton.setOnClickListener {
+            // Navigate to the PlaySudokuActivity
+            val intent = Intent(this, com.example.sudokuzen.view.custom.PlaySudokuActivity::class.java)
             startActivity(intent)
         }
     }

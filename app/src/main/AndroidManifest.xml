@@ -42,6 +42,10 @@
             android:theme="@style/Theme.SudokuZen">
         </activity>
 
+        <activity android:name=".view.custom.PlaySudokuActivity" />
+
+
+
     </application>
 
 </manifest>
