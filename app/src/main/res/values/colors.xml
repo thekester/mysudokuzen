@@ -5,4 +5,5 @@
      <color name="colorPrimary">#6ead3a</color>
     <color name="colorPrimaryDark">#236416</color>
     <color name="colorAccent">#793aad</color>
+    <color name="purple_500">#9C27B0</color> <!-- You can change the hex code to the shade you need -->
 </resources>

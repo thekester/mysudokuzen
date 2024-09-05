@@ -60,6 +60,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.firebase.inappmessaging)
+    implementation(libs.androidx.gridlayout)
 
     // Test dependencies
     testImplementation(libs.junit)
