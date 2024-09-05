@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+
         // Button to view scores
         val scoresButton = findViewById<Button>(R.id.scoresButton)
         scoresButton.setOnClickListener {

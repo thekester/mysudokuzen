@@ -2,12 +2,13 @@ package com.example.sudokuzen.view.custom
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View // Import the View class
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.sudokuzen.databinding.ActivityPlaySudokuBinding
 import com.example.sudokuzen.viewmodel.PlaySudokuViewModel
+import com.example.sudokuzen.viewmodel.PlaySudokuViewModelFactory
 import com.example.sudokuzen.game.Cell
 import android.graphics.PorterDuff
 import androidx.core.content.ContextCompat
@@ -20,6 +21,7 @@ class PlaySudokuActivity : AppCompatActivity(), SudokuBoardView.OnTouchListener 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         // Use ViewBinding to inflate the layout
         binding = ActivityPlaySudokuBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -27,8 +29,9 @@ class PlaySudokuActivity : AppCompatActivity(), SudokuBoardView.OnTouchListener 
         // Register the listener for the SudokuBoardView
         binding.sudokuBoardView.registerListener(this)
 
-        // Initialize ViewModel using ViewModelProvider from androidx.lifecycle
-        viewModel = ViewModelProvider(this)[PlaySudokuViewModel::class.java]
+        // Initialize ViewModel using the custom ViewModelFactory
+        val factory = PlaySudokuViewModelFactory(applicationContext)
+        viewModel = ViewModelProvider(this, factory)[PlaySudokuViewModel::class.java]
 
         // Observe LiveData from ViewModel
         viewModel.sudokuGame.selectedCellLiveData.observe(this, Observer { updateSelectedCellUI(it) })

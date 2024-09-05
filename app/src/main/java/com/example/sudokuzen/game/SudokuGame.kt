@@ -1,10 +1,12 @@
 package com.example.sudokuzen.game
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
-
 import android.util.Log
+import com.google.gson.Gson
+import java.io.InputStreamReader
 
-class SudokuGame {
+class SudokuGame(private val context: Context) {
 
     var selectedCellLiveData = MutableLiveData<Pair<Int, Int>>()
     var cellsLiveData = MutableLiveData<List<Cell>>()
@@ -18,13 +20,35 @@ class SudokuGame {
     private val board: Board
 
     init {
-        val cells = List(9 * 9) {i -> Cell(i / 9, i % 9, i % 9)}
-        cells[0].notes = mutableSetOf(1, 2, 3, 4, 5, 6, 7, 8, 9)
+        val sudokuGrid = loadSudokuFromAssets("Medium") // Load Medium as default
+        val cells = sudokuGrid.flatten().mapIndexed { index, value ->
+            Cell(index / 9, index % 9, value)
+        }
         board = Board(9, cells)
 
         selectedCellLiveData.postValue(Pair(selectedRow, selectedCol))
         cellsLiveData.postValue(board.cells)
         isTakingNotesLiveData.postValue(isTakingNotes)
+    }
+
+    private fun loadSudokuFromAssets(difficulty: String): List<List<Int>> {
+        val fileName = when (difficulty) {
+            "Easy" -> "json/easysudoku.json"
+            "Medium" -> "json/mediumsudoku.json"
+            "Hard" -> "json/hardsudoku.json"
+            else -> "json/mediumsudoku.json"
+        }
+
+        try {
+            val inputStream = context.assets.open(fileName)
+            val reader = InputStreamReader(inputStream)
+            val sudoku = Gson().fromJson(reader, Sudoku::class.java)
+            reader.close()
+            return sudoku.sudokus[0].grid
+        } catch (e: Exception) {
+            Log.e("SudokuGame", "Error loading Sudoku from assets", e)
+            throw e
+        }
     }
 
     fun handleInput(number: Int) {
@@ -44,7 +68,6 @@ class SudokuGame {
         }
         cellsLiveData.postValue(board.cells)
     }
-
 
     fun updateSelectedCell(row: Int, col: Int) {
         val cell = board.getCell(row, col)
@@ -66,7 +89,7 @@ class SudokuGame {
         val curNotes = if (isTakingNotes) {
             board.getCell(selectedRow, selectedCol).notes
         } else {
-            setOf<Int>()
+            setOf()
         }
         highlightedKeysLiveData.postValue(curNotes)
     }
@@ -82,3 +105,6 @@ class SudokuGame {
         cellsLiveData.postValue(board.cells)
     }
 }
+
+data class Sudoku(val sudokus: List<SudokuGrid>)
+data class SudokuGrid(val id: Int, val difficulty: String, val grid: List<List<Int>>)

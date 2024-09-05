@@ -1,8 +1,9 @@
 package com.example.sudokuzen.viewmodel
 
-import androidx.lifecycle.ViewModel // Use AndroidX's ViewModel
+import android.content.Context
+import androidx.lifecycle.ViewModel
 import com.example.sudokuzen.game.SudokuGame
 
-class PlaySudokuViewModel : ViewModel() {
-    val sudokuGame = SudokuGame()
+class PlaySudokuViewModel(context: Context) : ViewModel() {
+    var sudokuGame = SudokuGame(context) // Pass context to SudokuGame
 }
