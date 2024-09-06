@@ -14,12 +14,10 @@ class MainActivity : AppCompatActivity() {
         // Button to begin a new game
         val startButton = findViewById<Button>(R.id.startButton)
         startButton.setOnClickListener {
-            // Go to the game activity
-            val intent = Intent(this, GameActivity::class.java)
+            // Navigate to the PlaySudokuActivity
+            val intent = Intent(this, com.example.sudokuzen.view.custom.PlaySudokuActivity::class.java)
             startActivity(intent)
         }
-
-
 
         // Button to view scores
         val scoresButton = findViewById<Button>(R.id.scoresButton)
@@ -37,12 +35,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Button to test new sudoku game
-        val testButton = findViewById<Button>(R.id.testButton)
-        testButton.setOnClickListener {
-            // Navigate to the PlaySudokuActivity
-            val intent = Intent(this, com.example.sudokuzen.view.custom.PlaySudokuActivity::class.java)
-            startActivity(intent)
-        }
+        // Removed the testButton as it's no longer needed
     }
 }
