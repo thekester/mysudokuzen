@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.preference.PreferenceManager
 import com.google.gson.Gson
 import java.io.InputStreamReader
+import kotlin.random.Random
 
 class SudokuGame(private val context: Context) {
 
@@ -42,13 +43,9 @@ class SudokuGame(private val context: Context) {
         return sharedPreferences.getString("difficulty", "Medium") ?: "Medium" // Par défaut Medium
     }
 
+    // Méthode pour charger un fichier JSON aléatoire en fonction de la difficulté
     private fun loadSudokuFromAssets(difficulty: String): List<List<Int>> {
-        val fileName = when (difficulty) {
-            "Easy" -> "json/easysudoku.json"
-            "Medium" -> "json/mediumsudoku.json"
-            "Hard" -> "json/hardsudoku.json"
-            else -> "json/mediumsudoku.json" // Par défaut à "Medium"
-        }
+        val fileName = getRandomSudokuFileName(difficulty)
 
         try {
             val inputStream = context.assets.open(fileName)
@@ -59,6 +56,17 @@ class SudokuGame(private val context: Context) {
         } catch (e: Exception) {
             Log.e("SudokuGame", "Error loading Sudoku from assets", e)
             throw e
+        }
+    }
+
+    // Méthode pour obtenir un nom de fichier aléatoire en fonction de la difficulté
+    private fun getRandomSudokuFileName(difficulty: String): String {
+        val fileNumber = Random.nextInt(1, 11) // Choix aléatoire entre 1 et 10
+        return when (difficulty) {
+            "Easy" -> "json/easy/sudoku$fileNumber.json"
+            "Medium" -> "json/medium/sudoku$fileNumber.json"
+            "Hard" -> "json/hard/sudoku$fileNumber.json"
+            else -> "json/medium/sudoku$fileNumber.json" // Par défaut à "Medium"
         }
     }
 
