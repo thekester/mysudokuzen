@@ -3,6 +3,7 @@ package com.example.sudokuzen.game
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import android.util.Log
+import androidx.preference.PreferenceManager
 import com.google.gson.Gson
 import java.io.InputStreamReader
 
@@ -20,7 +21,11 @@ class SudokuGame(private val context: Context) {
     private val board: Board
 
     init {
-        val sudokuGrid = loadSudokuFromAssets("Medium") // Load Medium as default
+        // Récupérer la difficulté depuis SharedPreferences
+        val difficulty = getDifficultyFromPreferences()
+
+        // Charger la grille en fonction de la difficulté
+        val sudokuGrid = loadSudokuFromAssets(difficulty)
         val cells = sudokuGrid.flatten().mapIndexed { index, value ->
             Cell(index / 9, index % 9, value)
         }
@@ -31,12 +36,18 @@ class SudokuGame(private val context: Context) {
         isTakingNotesLiveData.postValue(isTakingNotes)
     }
 
+    // Méthode pour obtenir la difficulté depuis les SharedPreferences
+    private fun getDifficultyFromPreferences(): String {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        return sharedPreferences.getString("difficulty", "Medium") ?: "Medium" // Par défaut Medium
+    }
+
     private fun loadSudokuFromAssets(difficulty: String): List<List<Int>> {
         val fileName = when (difficulty) {
             "Easy" -> "json/easysudoku.json"
             "Medium" -> "json/mediumsudoku.json"
             "Hard" -> "json/hardsudoku.json"
-            else -> "json/mediumsudoku.json"
+            else -> "json/mediumsudoku.json" // Par défaut à "Medium"
         }
 
         try {
