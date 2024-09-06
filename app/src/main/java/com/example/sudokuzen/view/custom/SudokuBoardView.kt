@@ -68,12 +68,6 @@ class SudokuBoardView(context: Context, attributeSet: AttributeSet) : View(conte
         color = Color.parseColor("#acacac")
     }
 
-    /*override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        val sizePixels = min(widthMeasureSpec, heightMeasureSpec)
-        setMeasuredDimension(sizePixels, sizePixels)
-    }*/
-
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         // Handle width and height based on MeasureSpec
         val width = MeasureSpec.getSize(widthMeasureSpec)
@@ -100,26 +94,39 @@ class SudokuBoardView(context: Context, attributeSet: AttributeSet) : View(conte
         startingCellTextPaint.textSize = cellSizePixels / 1.5F
     }
 
+    private val invalidCellPaint = Paint().apply {
+        style = Paint.Style.FILL_AND_STROKE
+        color = Color.parseColor("#FF0000") // Red color for invalid cells
+    }
+
     private fun fillCells(canvas: Canvas) {
         cells?.forEach {
             val r = it.row
             val c = it.col
 
-            if (it.isStartingCell) {
-                fillCell(canvas, r, c, startingCellPaint)
-            } else if (r == selectedRow && c == selectedCol) {
-                fillCell(canvas, r, c, selectedCellPaint)
-            } else if (r == selectedRow || c == selectedCol) {
-                fillCell(canvas, r, c, conflictingCellPaint)
-            } else if (r / sqrtSize == selectedRow / sqrtSize && c / sqrtSize == selectedCol / sqrtSize) {
-                fillCell(canvas, r, c, conflictingCellPaint)
+            val paintToUse = when {
+                it.isStartingCell -> startingCellPaint
+                !it.isValid -> {
+                    Log.d("SudokuBoardView", "Marking cell at row $r, column $c as invalid (red).")
+                    invalidCellPaint // Red for invalid cells
+                }
+                r == selectedRow && c == selectedCol -> selectedCellPaint // Apply green only if valid
+                r == selectedRow || c == selectedCol -> conflictingCellPaint
+                r / sqrtSize == selectedRow / sqrtSize && c / sqrtSize == selectedCol / sqrtSize -> conflictingCellPaint
+                else -> null
+            }
+
+            if (paintToUse != null) {
+                fillCell(canvas, r, c, paintToUse)
             }
         }
     }
 
     private fun fillCell(canvas: Canvas, r: Int, c: Int, paint: Paint) {
+        Log.d("SudokuBoardView", "Drawing cell at row $r, column $c with color: ${paint.color}")
         canvas.drawRect(c * cellSizePixels, r * cellSizePixels, (c + 1) * cellSizePixels, (r + 1) * cellSizePixels, paint)
     }
+
 
     private fun drawLines(canvas: Canvas) {
         canvas.drawRect(0F, 0F, width.toFloat(), height.toFloat(), thickLinePaint)
