@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.example.sudokuzen.SettingsActivity
+import android.net.Uri
+import android.widget.ImageView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +37,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Removed the testButton as it's no longer needed
+        val buyMeCoffeeIcon: ImageView = findViewById(R.id.buyMeCoffeeIcon)
+        buyMeCoffeeIcon.setOnClickListener {
+            val url = "https://www.buymeacoffee.com/tavenel"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
     }
+
 }
