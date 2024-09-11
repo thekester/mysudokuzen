@@ -18,7 +18,10 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
-        // Find the Back button by its ID
+        // Find the TextView for difficulty level
+        val difficultyTextView = findViewById<TextView>(R.id.difficultyTextView)
+
+        // Find the Back button, GridView, and Error TextView
         val backButton = findViewById<Button>(R.id.backButton)
         val gridView = findViewById<GridView>(R.id.sudokuGridView)
         val errorTextView = findViewById<TextView>(R.id.errorTextView)
@@ -31,6 +34,9 @@ class GameActivity : AppCompatActivity() {
         // Retrieve the difficulty selected from SharedPreferences
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val difficulty = sharedPreferences.getString("difficulty", "Medium") ?: "Medium"
+
+        // Display the difficulty level in the TextView
+        difficultyTextView.text = "Difficulty: $difficulty"
 
         try {
             // Load the appropriate JSON file depending on the difficulty
@@ -59,7 +65,7 @@ class GameActivity : AppCompatActivity() {
             "Easy" -> "json/easysudoku.json"
             "Medium" -> "json/mediumsudoku.json"
             "Hard" -> "json/hardsudoku.json"
-            else -> "json/mediumsudoku.json" // Par défaut à "Medium" si rien n'est sélectionné
+            else -> "json/mediumsudoku.json" // Default to "Medium" if nothing is selected
         }
 
         val inputStream = assets.open(fileName)

@@ -24,6 +24,20 @@
 
     <string name="buy_me_coffee_icon">Support by buying a coffee</string>
 
+    <string name="content_desc_notes">Take notes</string>
+    <string name="content_desc_delete">Delete cell content</string>
+
+    <!-- Number Strings -->
+    <string name="number_one">1</string>
+    <string name="number_two">2</string>
+    <string name="number_three">3</string>
+    <string name="number_four">4</string>
+    <string name="number_five">5</string>
+    <string name="number_six">6</string>
+    <string name="number_seven">7</string>
+    <string name="number_eight">8</string>
+    <string name="number_nine">9</string>
+
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
