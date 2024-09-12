@@ -20,6 +20,9 @@ class SudokuGame(private val context: Context) {
 
     private val board: Board
 
+    // List to store the initial cell positions
+    private val initialCellsPositions = mutableSetOf<Pair<Int, Int>>()
+
     init {
         // Retrieve difficulty from SharedPreferences
         val difficulty = getDifficultyFromPreferences()
@@ -27,13 +30,25 @@ class SudokuGame(private val context: Context) {
         // Load the grid based on difficulty
         val sudokuGrid = loadSudokuFromAssets(difficulty)
         val cells = sudokuGrid.flatten().mapIndexed { index, value ->
-            Cell(index / 9, index % 9, value)
+            val cell = Cell(index / 9, index % 9, value)
+
+            // Store initial cell positions where value is not zero
+            if (cell.value != 0) {
+                initialCellsPositions.add(Pair(cell.row, cell.col))
+            }
+
+            cell
         }
         board = Board(9, cells)
 
         selectedCellLiveData.postValue(Pair(selectedRow, selectedCol))
         cellsLiveData.postValue(board.cells)
         isTakingNotesLiveData.postValue(isTakingNotes)
+    }
+
+    // Check if a cell is an initial cell
+    fun isInitialCell(row: Int, col: Int): Boolean {
+        return initialCellsPositions.contains(Pair(row, col))
     }
 
     // Method to get the difficulty level from SharedPreferences
@@ -155,15 +170,25 @@ class SudokuGame(private val context: Context) {
     // Delete the content of a cell
     fun delete() {
         val cell = board.getCell(selectedRow, selectedCol)
+
+        // Prevents deletion of values in initial cells
+        if (cell.isStartingCell) return
+
         if (isTakingNotes) {
             cell.notes.clear()
             highlightedKeysLiveData.postValue(setOf())
         } else {
             cell.value = 0
-            cell.isValid = true // Resets cell validity when deleted
+            cell.isValid = true // Resets the validity of the cell after deleting the values in the initial cells
         }
         cellsLiveData.postValue(board.cells)
     }
+
+    fun getCell(row: Int, col: Int): Cell {
+        return board.getCell(row, col)
+    }
+
+
 }
 
 // Data models for JSON parsing
