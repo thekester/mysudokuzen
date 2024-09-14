@@ -1,142 +1,140 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.custom.PlaySudokuActivity">
 
-    <!-- Sudoku BoardView centered with increased size -->
+    <!-- Sudoku BoardView centered and adjusted size based on screen -->
     <com.example.sudokuzen.view.custom.SudokuBoardView
         android:id="@+id/sudokuBoardView"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:layout_centerInParent="true"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="16dp"
-        android:layout_above="@id/buttonsLayout"
         android:padding="8dp"
         android:background="@color/white"
-        android:elevation="2dp" />
+        android:elevation="2dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonsLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- GridLayout for Number Buttons centered horizontally -->
+    <!-- GridLayout for Number Buttons and special buttons, centered horizontally -->
     <GridLayout
         android:id="@+id/buttonsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/backButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
         android:columnCount="3"
-        android:rowCount="4">
+        android:rowCount="4"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintTop_toBottomOf="@id/sudokuBoardView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Number Buttons -->
+        <!-- Number Buttons (with reduced margin and padding) -->
         <Button
             android:id="@+id/oneButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:text="@string/number_one" />
+            android:text="@string/number_one"
+            android:layout_margin="4dp"
+            android:padding="4dp" />
 
         <Button
             android:id="@+id/twoButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="1"
-            android:text="@string/number_two" />
+            android:text="@string/number_two"
+            android:layout_margin="4dp"
+            android:padding="4dp" />
 
         <Button
             android:id="@+id/threeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="2"
-            android:text="@string/number_three" />
-
+            android:text="@string/number_three"
+            android:layout_margin="4dp"
+            android:padding="4dp" />
 
         <Button
             android:id="@+id/fourButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:text="@string/number_four" />
+            android:text="@string/number_four"
+            android:layout_margin="4dp"
+            android:padding="4dp" />
 
         <Button
             android:id="@+id/fiveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:text="@string/number_five" />
+            android:text="@string/number_five"
+            android:layout_margin="4dp"
+            android:padding="4dp" />
 
         <Button
             android:id="@+id/sixButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="2"
-            android:text="@string/number_six" />
+            android:text="@string/number_six"
+            android:layout_margin="4dp"
+            android:padding="4dp" />
 
         <Button
             android:id="@+id/sevenButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="2"
-            android:layout_column="0"
-            android:text="@string/number_seven" />
+            android:text="@string/number_seven"
+            android:layout_margin="4dp"
+            android:padding="4dp" />
 
         <Button
             android:id="@+id/eightButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="2"
-            android:layout_column="1"
-            android:text="@string/number_eight" />
+            android:text="@string/number_eight"
+            android:layout_margin="4dp"
+            android:padding="4dp" />
 
         <Button
             android:id="@+id/nineButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="2"
-            android:layout_column="2"
-            android:text="@string/number_nine" />
+            android:text="@string/number_nine"
+            android:layout_margin="4dp"
+            android:padding="4dp" />
 
-        <!-- Notes Button -->
+        <!-- Notes Button (larger size for easier clickability) -->
         <ImageButton
             android:id="@+id/notesButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            android:layout_row="3"
-            android:layout_column="0"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             app:srcCompat="@drawable/edit_pen_black"
+            android:layout_margin="4dp"
+            android:padding="8dp"
             android:contentDescription="@string/content_desc_notes" />
 
-        <!-- Delete Button -->
+        <!-- Delete Button (larger size for easier clickability) -->
         <ImageButton
             android:id="@+id/deleteButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            android:layout_row="3"
-            android:layout_column="2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             app:srcCompat="@drawable/delete_black"
+            android:layout_margin="4dp"
+            android:padding="8dp"
             android:contentDescription="@string/content_desc_delete" />
     </GridLayout>
 
-    <!-- Back Button moved to the bottom-right -->
+    <!-- Back Button moved to the bottom-right corner -->
     <Button
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/back_button_text"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:onClick="handleBackButton" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

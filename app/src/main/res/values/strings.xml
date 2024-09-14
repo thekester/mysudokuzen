@@ -38,6 +38,10 @@
     <string name="number_eight">8</string>
     <string name="number_nine">9</string>
 
+    <!-- Success message shown after completing a puzzle -->
+    <string name="success_message">
+        Congratulations! You\'ve completed a %1$s puzzle and earned %2$d points!
+    </string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

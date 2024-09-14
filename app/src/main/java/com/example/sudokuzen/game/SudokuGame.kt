@@ -1,9 +1,11 @@
 package com.example.sudokuzen.game
 
 import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.MutableLiveData
 import android.util.Log
 import androidx.preference.PreferenceManager
+import com.example.sudokuzen.SuccessActivity
 import com.google.gson.Gson
 import java.io.InputStreamReader
 
@@ -17,6 +19,11 @@ class SudokuGame(private val context: Context) {
     private var selectedRow = -1
     private var selectedCol = -1
     private var isTakingNotes = false
+
+    // Define points for each difficulty level
+    private val EASY_POINTS = 10
+    private val MEDIUM_POINTS = 20
+    private val HARD_POINTS = 30
 
     private val board: Board
 
@@ -52,10 +59,12 @@ class SudokuGame(private val context: Context) {
     }
 
     // Method to get the difficulty level from SharedPreferences
+    // SudokuGame.kt
     private fun getDifficultyFromPreferences(): String {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         return sharedPreferences.getString("difficulty", "Medium") ?: "Medium" // Default to "Medium"
     }
+
 
     // Load a random Sudoku file based on difficulty
     private fun loadSudokuFromAssets(difficulty: String): List<List<Int>> {
@@ -113,14 +122,34 @@ class SudokuGame(private val context: Context) {
         return true
     }
 
+    // Check if the game is completed
+    fun isGameCompleted(): Boolean {
+        for (cell in board.cells) {
+            if (cell.value == 0 || !cell.isValid) {
+                return false
+            }
+        }
+        return true
+    }
+
+    // Increase the score by 1 and save it in SharedPreferences
+    // SudokuGame.kt
+    fun increaseScore(points: Int) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val currentScore = sharedPreferences.getInt("score", 0)
+        sharedPreferences.edit().putInt("score", currentScore + points).apply()
+    }
+
+
     // User input management
+    // SudokuGame.kt
     fun handleInput(number: Int) {
         if (selectedRow == -1 || selectedCol == -1) return
         val cell = board.getCell(selectedRow, selectedCol)
         if (cell.isStartingCell) return
 
         if (isTakingNotes) {
-            // In note-taking mode, add or remove the number from notes
+            // Note-taking mode logic
             if (cell.notes.contains(number)) {
                 cell.notes.remove(number)
             } else {
@@ -128,7 +157,7 @@ class SudokuGame(private val context: Context) {
             }
             highlightedKeysLiveData.postValue(cell.notes)
         } else {
-            // Check rules before adding the input
+            // Normal input mode
             val validMove = isValidMove(selectedRow, selectedCol, number)
             cell.value = number
             cell.isValid = validMove
@@ -136,9 +165,27 @@ class SudokuGame(private val context: Context) {
             if (!validMove) {
                 Log.d("SudokuGame", "Move is invalid for number $number at row $selectedRow, column $selectedCol.")
             }
+
+            // Check if the game is completed after the move
+            if (isGameCompleted()) {
+                val difficulty = getDifficultyFromPreferences()
+                val points = when (difficulty) {
+                    "Easy" -> EASY_POINTS
+                    "Medium" -> MEDIUM_POINTS
+                    "Hard" -> HARD_POINTS
+                    else -> MEDIUM_POINTS // Default to Medium
+                }
+                increaseScore(points)
+                val intent = Intent(context, SuccessActivity::class.java).apply {
+                    putExtra("difficulty", difficulty)
+                    putExtra("points", points)
+                }
+                context.startActivity(intent)
+            }
         }
         cellsLiveData.postValue(board.cells)
     }
+
 
     // Update the selected cell
     fun updateSelectedCell(row: Int, col: Int) {
@@ -179,7 +226,7 @@ class SudokuGame(private val context: Context) {
             highlightedKeysLiveData.postValue(setOf())
         } else {
             cell.value = 0
-            cell.isValid = true // Resets the validity of the cell after deleting the values in the initial cells
+            cell.isValid = true // Resets the validity of the cell after deleting the values
         }
         cellsLiveData.postValue(board.cells)
     }
@@ -187,7 +234,6 @@ class SudokuGame(private val context: Context) {
     fun getCell(row: Int, col: Int): Cell {
         return board.getCell(row, col)
     }
-
 
 }
 

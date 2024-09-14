@@ -14,6 +14,7 @@ import com.example.sudokuzen.game.Cell
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Build
+import android.util.DisplayMetrics
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
@@ -55,6 +56,30 @@ class PlaySudokuActivity : AppCompatActivity(), SudokuBoardView.OnTouchListener 
 
         binding.notesButton.setOnClickListener { viewModel.sudokuGame.changeNoteTakingState() }
         binding.deleteButton.setOnClickListener { viewModel.sudokuGame.delete() }
+
+        // Adjust Sudoku board size based on screen size
+        adjustSudokuBoardSize()
+
+
+    }
+
+
+    private fun adjustSudokuBoardSize() {
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+
+        // Get screen dimensions in pixels
+        val screenWidth = displayMetrics.widthPixels
+        val screenHeight = displayMetrics.heightPixels
+
+        // Calculate the optimal size for the Sudoku board (e.g., 80% of the smaller screen dimension)
+        val boardSize = (minOf(screenWidth, screenHeight) * 0.58).toInt()
+
+        // Set the size of the Sudoku board dynamically
+        val layoutParams = binding.sudokuBoardView.layoutParams
+        layoutParams.width = boardSize
+        layoutParams.height = boardSize
+        binding.sudokuBoardView.layoutParams = layoutParams
     }
 
     private fun updateCells(cells: List<Cell>?) {
