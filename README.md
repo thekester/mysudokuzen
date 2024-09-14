@@ -1,3 +1,4 @@
+
 # MySudokuZen
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/thekester/mysudokuzen)
@@ -8,7 +9,7 @@
 
 An Android app for Sudoku without ads, designed for a seamless and distraction-free Sudoku experience.
 
-![Demo](demo.png)
+![Demo](SudokuZen.gif)
 
 ## Features
 
@@ -17,12 +18,14 @@ An Android app for Sudoku without ads, designed for a seamless and distraction-f
 - **Error Highlighting**: Visual feedback when incorrect numbers are placed, allowing you to fix mistakes quickly.
 - **Simple UI**: Intuitive interface designed for smooth interactions and ease of use.
 - **No Ads**: Completely free and ad-free Sudoku experience.
+- **Completed Game Screen**: A congratulatory screen with dynamic points display based on the difficulty level of the puzzle, shown when the game is completed successfully.
+- **Improved Tablet UI**: Optimized layout for tablets, ensuring a responsive experience with appropriately sized buttons and grids.
 
 ## Getting Started
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusthekesterername/mysudokuzen.git
+   git clone https://github.com/yourgithubusername/mysudokuzen.git
    ```
 
 2. Open the project in Android Studio.
@@ -33,18 +36,15 @@ An Android app for Sudoku without ads, designed for a seamless and distraction-f
 
 Here’s a quick look at MySudokuZen:
 
-![Sudoku Demo](demo.png)
+![Sudoku Demo](SudokuZen.gif)
 
-## Future Features (Suggested Images)
+## Future Features
 
-To enhance your README, consider adding images for the following features:
-
-1. **Difficulty Selection Screen**: Show how users can choose between Easy, Medium, and Hard difficulty levels.
-2. **Note-Taking in Action**: Capture an image of the app in note-taking mode, highlighting multiple numbers in a cell.
-3. **Error Highlighting**: Demonstrate the error feedback feature, with incorrect numbers turning red.
-4. **Completed Game Screen**: Show the congratulatory screen when a user completes a puzzle successfully.
+- **More Puzzle Difficulty Levels**: Implement more variety in puzzle difficulty, from very easy to expert.
+- **Dark Mode**: Provide a dark theme for better usability in low-light environments.
+- **Improve Design**: Enhance the overall design and user experience of the app.
+- **Google Play Store**: Deploy the app on the Google Play Store.
 
 ## License
 
 This project is licensed under a custom license for personal, non-commercial use. See the [LICENSE](LICENSE) file for details.
-
