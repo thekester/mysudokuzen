@@ -24,7 +24,10 @@
 
     <string name="buy_me_coffee_icon">Support by buying a coffee</string>
 
+<<<<<<< HEAD
     <string name="content_desc_hint">Get a hint</string>
+=======
+>>>>>>> origin/main
     <string name="content_desc_notes">Take notes</string>
     <string name="content_desc_delete">Delete cell content</string>
 
@@ -39,7 +42,10 @@
     <string name="number_eight">8</string>
     <string name="number_nine">9</string>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
     <!-- Success message shown after completing a puzzle -->
     <string name="success_message">
         Congratulations! You\'ve completed a %1$s puzzle and earned %2$d points!
