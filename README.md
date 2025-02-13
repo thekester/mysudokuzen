@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 # MySudokuZen
 
@@ -49,7 +48,6 @@ Here’s a quick look at MySudokuZen:
 ## License
 
 This project is licensed under a custom license for personal, non-commercial use. See the [LICENSE](LICENSE) file for details.
-=======
 
 # MySudokuZen
 
@@ -100,4 +98,3 @@ Here’s a quick look at MySudokuZen:
 ## License
 
 This project is licensed under a custom license for personal, non-commercial use. See the [LICENSE](LICENSE) file for details.
->>>>>>> origin/main
