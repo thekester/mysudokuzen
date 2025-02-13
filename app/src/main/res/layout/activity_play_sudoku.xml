@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.custom.PlaySudokuActivity">
+
+    <!-- Guideline pour réserver 70% de la hauteur de l'écran à la grille -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBoard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.68" />
+
+    <!-- Texte affichant "Sudoku" placé en haut -->
+    <TextView
+        android:id="@+id/sudokuTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sudoku"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Vue de la grille Sudoku -->
+
+    <!-- GridLayout pour les boutons avec un margin global pour plus d'aération -->
+    <com.example.sudokuzen.view.custom.SudokuBoardView
+        android:id="@+id/sudokuBoardView"
+        android:layout_width="379dp"
+        android:layout_height="470dp"
+        android:layout_margin="12dp"
+        android:layout_marginTop="-1dp"
+        android:layout_marginBottom="0dp"
+        android:background="@color/white"
+        android:elevation="1dp"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@id/guidelineBoard"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.642" />
+
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/buttonsLayout"
+        android:layout_width="368dp"
+        android:layout_height="250dp"
+        android:layout_margin="0dp"
+        app:columnCount="3"
+        app:layout_constraintBottom_toTopOf="@id/backButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineBoard"
+        app:layout_constraintVertical_bias="1.0"
+        app:rowCount="4">
+
+        <!-- Boutons numériques et boutons d'action (marges individuelles conservées) -->
+        <Button
+            android:id="@+id/oneButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:text="@string/number_one"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <Button
+            android:id="@+id/twoButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:text="@string/number_two"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <Button
+            android:id="@+id/threeButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:text="@string/number_three"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <Button
+            android:id="@+id/fourButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:text="@string/number_four"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <Button
+            android:id="@+id/fiveButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:text="@string/number_five"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <Button
+            android:id="@+id/sixButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:text="@string/number_six"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <Button
+            android:id="@+id/sevenButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:text="@string/number_seven"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <Button
+            android:id="@+id/eightButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:text="@string/number_eight"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <Button
+            android:id="@+id/nineButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:text="@string/number_nine"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <ImageButton
+            android:id="@+id/notesButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:contentDescription="@string/content_desc_notes"
+            android:padding="8dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:srcCompat="@drawable/edit_pen_black" />
+
+        <ImageButton
+            android:id="@+id/hintButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:contentDescription="@string/content_desc_hint"
+            android:padding="8dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:srcCompat="@drawable/hint_icon" />
+
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="4dp"
+            android:contentDescription="@string/content_desc_delete"
+            android:padding="8dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:srcCompat="@drawable/delete_black" />
+
+    </androidx.gridlayout.widget.GridLayout>
+
+    <!-- Bouton de retour positionné en bas à droite -->
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back_button_text"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="handleBackButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

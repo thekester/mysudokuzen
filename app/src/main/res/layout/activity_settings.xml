@@ -11,14 +11,15 @@
         android:id="@+id/soundTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enable Sounds"
+        android:text="@string/enable_sounds"
         android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="32dp"
         android:layout_marginStart="16dp" />
 
-    <Switch
+    <!-- Utiliser SwitchCompat à la place de Switch -->
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/soundSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,7 +32,7 @@
         android:id="@+id/difficultyTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Difficulty"
+        android:text="@string/select_difficulty"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/soundTextView"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -50,19 +51,19 @@
             android:id="@+id/easyRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Easy" />
+            android:text="@string/difficulty_easy" />
 
         <RadioButton
             android:id="@+id/mediumRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Medium" />
+            android:text="@string/difficulty_medium" />
 
         <RadioButton
             android:id="@+id/hardRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hard" />
+            android:text="@string/difficulty_hard" />
     </RadioGroup>
 
     <!-- Back Button -->
@@ -70,7 +71,7 @@
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
+        android:text="@string/back_button_text"
         android:layout_marginTop="32dp"
         app:layout_constraintTop_toBottomOf="@id/difficultyRadioGroup"
         app:layout_constraintLeft_toLeftOf="parent"

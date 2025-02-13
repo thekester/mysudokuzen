@@ -5,34 +5,45 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.example.sudokuzen.SettingsActivity
+import android.net.Uri
+import android.widget.ImageView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Bouton pour commencer un nouveau jeu
+        // Button to begin a new game
         val startButton = findViewById<Button>(R.id.startButton)
         startButton.setOnClickListener {
-            // Naviguer vers l'activité du jeu
-            val intent = Intent(this, GameActivity::class.java)
+            // Navigate to the PlaySudokuActivity
+            val intent = Intent(this, com.example.sudokuzen.view.custom.PlaySudokuActivity::class.java)
             startActivity(intent)
         }
 
-        // Bouton pour voir les scores
+        // Button to view scores
         val scoresButton = findViewById<Button>(R.id.scoresButton)
         scoresButton.setOnClickListener {
-            // Naviguer vers l'activité des scores
+            // Navigate to the scores activity
             val intent = Intent(this, ScoresActivity::class.java)
             startActivity(intent)
         }
 
-        // Bouton pour accéder aux paramètres
+        // Button to access settings
         val settingsButton = findViewById<Button>(R.id.settingsButton)
         settingsButton.setOnClickListener {
-            // Naviguer vers l'activité des paramètres
+            // Navigate to the settings activity
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
+
+        val buyMeCoffeeIcon: ImageView = findViewById(R.id.buyMeCoffeeIcon)
+        buyMeCoffeeIcon.setOnClickListener {
+            val url = "https://www.buymeacoffee.com/tavenel"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
     }
+
 }
